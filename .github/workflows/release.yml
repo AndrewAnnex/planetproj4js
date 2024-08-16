@@ -30,7 +30,7 @@ jobs:
           npm publish --provenance --access public
         
   publish-gpr:
-    runs-on: ubunutu-latest
+    runs-on: ubuntu-latest
     permissions:
       packages: write
       contents: read
