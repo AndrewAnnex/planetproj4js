@@ -5,7 +5,7 @@ A library providing IAU:2015 coordinate reference systems to proj4js.
 ## Installation
 
 ```bash
-npm install planetproj4js proj4
+npm install planet-proj4 proj4
 ```
 
 
