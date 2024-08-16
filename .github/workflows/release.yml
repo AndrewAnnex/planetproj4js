@@ -1,23 +1,50 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'
+  release:
+    types: [created]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
-      - name: Install dependencies
-        run: npm install
-      - name: Build project
-        run: npm run build
+          node-version: '18'
+      - name: run ci
+        run: npm ci
       - name: Run tests
         run: npm run test
+
+  publish-npm:
+    environment: publish 
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Publish to NPM
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_GAT }}
+        run: |
+          npm config set @andrewannex:registry https://registry.npmjs.org/
+          npm publish --provenance --access public
+        
+  
+  publish-gpr:
+    needs: build
+    runs-on: ubunutu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Publish to GitHub Packages
+        run: |
+          npm config set @andrewannex:registry https://npm.pkg.github.com/
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

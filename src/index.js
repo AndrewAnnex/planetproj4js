@@ -8761,5 +8761,5 @@ proj4.defs([
     
 ]);
 
-// Optionally, export the proj4 object or any other utility functions
+
 module.exports = proj4;

@@ -3,9 +3,9 @@ const path = require('path');
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: 'planetproj4js.min.js',
+    filename: 'planet-proj4.min.js',
     path: path.resolve(__dirname, 'dist'),
-    library: 'PlanetProj4js',
+    library: 'PlanetProj4',
     libraryTarget: 'umd',
     globalObject: 'this'
   },

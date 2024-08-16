@@ -1,8 +1,8 @@
 {
-    "name": "planetproj4js",
+    "name": "@andrewannex/planet-proj4",
     "version": "0.0.1",
-    "description": "Providing IAU CRSs to Proj4js.",
-    "main": "dist/planetproj4js.min.js",
+    "description": "Providing Planetary IAU CRSs to Proj4js.",
+    "main": "dist/planet-proj4.min.js",
     "scripts": {
         "build": "webpack --mode production",
         "test": "jest"
@@ -12,9 +12,11 @@
         "url": "https://github.com/andrewannex/planetproj4js.git"
     },
     "keywords": [
-        "proj4js",
+        "proj4",
         "coordinate systems",
-        "CRS"
+        "CRS",
+        "IAU",
+        "Planaetary"
     ],
     "author": "Andrew Annex",
     "license": "MIT",
