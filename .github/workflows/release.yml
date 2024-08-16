@@ -5,8 +5,12 @@ on:
     types: [created]
 
 jobs:
-  build:
+  publish-npm:
+    environment: publish 
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -18,15 +22,6 @@ jobs:
         run: npm ci
       - name: Run tests
         run: npm run test
-
-  publish-npm:
-    environment: publish 
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
-    steps:
       - name: Publish to NPM
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GAT }}
@@ -34,14 +29,22 @@ jobs:
           npm config set @andrewannex:registry https://registry.npmjs.org/
           npm publish --provenance --access public
         
-  
   publish-gpr:
-    needs: build
     runs-on: ubunutu-latest
     permissions:
       packages: write
       contents: read
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: run ci
+        run: npm ci
+      - name: Run tests
+        run: npm run test
       - name: Publish to GitHub Packages
         run: |
           npm config set @andrewannex:registry https://npm.pkg.github.com/
