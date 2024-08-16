@@ -1,4 +1,4 @@
-# Your Library Name
+# PlanetProj4js
 
 A library providing IAU:2015 coordinate reference systems to proj4js.
 
